@@ -12,8 +12,9 @@ void ofApp::setup()
                       );
     
     // Setup Video and Tracking
-    piCam.setup(config.getSettings().camerawidth,
-                             config.getSettings().camerawidth,false);
+    VideoGrabber.setVerbose(true);
+    VideoGrabber.initGrabber(config.getSettings().camerawidth,
+                             config.getSettings().cameraheight);
     
     tracking.setup(config.getSettings().camerawidth,
                    config.getSettings().cameraheight,
@@ -57,8 +58,8 @@ void ofApp::exit()
 //--------------------------------------------------------------
 void ofApp::update()
 {
-    Mat tempCam = piCam.grab();
-    if(!tempCam.empty()){
+    Mat tempCam =  VideoGrabber.update();  // call this once per update
+    if (VideoGrabber.isFrameNew()){
         Mat cImage = tempCam;
         resize(cImage, resized, cv::Size(cImage.size().width, cImage.size().height));
         
