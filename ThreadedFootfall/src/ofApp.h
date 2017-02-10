@@ -5,7 +5,7 @@
 #include "Tracking.h"
 #include "LoadConfig.h"
 #include "HTTPHandler.h"
-#include "ofxCvPiCam.h"
+//#include "ofxCvPiCam.h"
 
 class ofApp : public ofBaseApp{
 
@@ -21,8 +21,8 @@ class ofApp : public ofBaseApp{
         Tracking tracking;
         LoadConfig config;
         HTTPHandler httpHandler;
-    	ofxCvPiCam piCam;
-        //ofVideoGrabber videoGrabber;
+    	//ofxCvPiCam piCam;
+        ofVideoGrabber videoGrabber;
         Mat camera;
         Mat lightenMat;
         Mat resized;
