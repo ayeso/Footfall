@@ -5,6 +5,7 @@
 #include "Tracking.h"
 #include "LoadConfig.h"
 #include "HTTPHandler.h"
+#include "ofVideoGrabber.h"
 //#include "ofxCvPiCam.h"
 
 class ofApp : public ofBaseApp{
