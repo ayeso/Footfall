@@ -22,8 +22,9 @@ class ofApp : public ofBaseApp{
         Tracking tracking;
         LoadConfig config;
         HTTPHandler httpHandler;
-    	//ofxCvPiCam piCam;
+        //ofTrueTypeFont font;
         ofVideoGrabber videoGrabber;
+        ofTexture videoTexture;
         Mat camera;
         Mat lightenMat;
         Mat resized;
