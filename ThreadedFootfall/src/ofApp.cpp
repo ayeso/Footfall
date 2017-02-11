@@ -12,8 +12,7 @@ void ofApp::setup()
                       );
     
     // Setup Video and Tracking
-    VideoGrabber.setVerbose(true);
-    VideoGrabber.initGrabber(config.getSettings().camerawidth,
+    videoGrabber.initGrabber(config.getSettings().camerawidth,
                              config.getSettings().cameraheight);
     
     tracking.setup(config.getSettings().camerawidth,
@@ -58,8 +57,9 @@ void ofApp::exit()
 //--------------------------------------------------------------
 void ofApp::update()
 {
-    Mat tempCam =  VideoGrabber.update();  // call this once per update
-    if (VideoGrabber.isFrameNew()){
+    videoGrabber.update();                
+    if(videoGrabber.isFrameNew()){
+        cv::Mat tempCam (config.getSettings().cameraheight, config.getSettings().camerawidth, CV_8UC4, videoGrabber.getPixels());
         Mat cImage = tempCam;
         resize(cImage, resized, cv::Size(cImage.size().width, cImage.size().height));
         
@@ -83,19 +83,6 @@ void ofApp::draw()
     ofBackground(25);
     tracking.draw(0, 0);
     tracking.drawHistory(0, 0);
-    
-    // Reporting
-    stringstream ss;
-    ss << "Footfall" << endl;
-    ss << "FPS: " << ofToString(ofGetFrameRate()) << endl;
-    ss << "Tally: " << tracking.getTally() << endl;
-    ss << "Count in: " << tracking.getCountIn() << endl;
-    ss << "Count out: " << tracking.getCountOut() << endl;
-    ss << "Is Tracking: " << tracking.isTracking() << endl;
-    ss << "Current Number of People: " << tracking.getCurrentNumberOfPeople() << endl;
-    
-    ofSetColor(ofColor::white);
-    ofDrawBitmapString(ss.str(), 10,400);
 }
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key)
